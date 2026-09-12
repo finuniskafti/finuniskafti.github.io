@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT.XYZ — Redefining The Future</title>
+    <!-- Google Fonts: Space Grotesk & Syne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- RESET & VARIABLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg-color: #080808;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --accent-green: #00ff66;
+            --accent-purple: #7928ca;
+            --accent-pink: #ff0080;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* --- BACKGROUND GLOW EFEK GEN-Z --- */
+        .glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-purple) 0%, rgba(0,0,0,0) 70%);
+            top: -100px;
+            left: -100px;
+            z-index: -1;
+            filter: blur(100px);
+            opacity: 0.5;
+        }
+
+        .glow-2 {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-green) 0%, rgba(0,0,0,0) 70%);
+            bottom: -150px;
+            right: -150px;
+            z-index: -1;
+            filter: blur(120px);
+            opacity: 0.3;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(45deg, #fff, var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        .btn-cta {
+            padding: 0.7rem 1.5rem;
+            background: var(--text-main);
+            color: #000;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-cta:hover {
+            background: var(--accent-green);
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 5%;
+            padding-top: 100px;
+        }
+
+        .badge {
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: var(--accent-green);
+            background: rgba(255, 255, 255, 0.02);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 0.95;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            font-weight: 800;
+        }
+
+        .hero h1 span {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--text-main);
+        }
+
+        .hero-desc {
+            max-width: 600px;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* --- TICKER / MARQUEE ANIMATION --- */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: #111;
+            padding: 1rem 0;
+            border-y: 1px solid var(--border-color);
+            transform: rotate(-1deg);
+            margin: 3rem 0;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 15s linear infinite;
+        }
+
+        .marquee-item {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-right: 3rem;
+            text-transform: uppercase;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- ABOUT & SERVICES SECTION --- */
+        .section {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            transition: 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-10px);
+        }
+
+        .card-num {
+            font-size: 3rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.1);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- STATS SECTION --- */
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0) 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            margin: 4rem 0;
+        }
+
+        .stat-item h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.5rem;
+            color: var(--accent-green);
+        }
+
+        .stat-item p {
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- FOOTER / CONTACT --- */
+        footer {
+            padding: 5rem 5% 2rem 5%;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        footer h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-bottom {
+            margin-top: 5rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 2rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 3.5rem; }
+            .stats-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Glow Effects -->
+    <div class="glow"></div>
+    <div class="glow-2"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">PT.XYZ</div>
+        <ul class="nav-links">
+            <li><a href="#about">Tentang</a></li>
+            <li><a href="#services">Layanan</a></li>
+            <li><a href="#stats">Dampak</a></li>
+        </ul>
+        <a href="#contact" class="btn-cta">Connect!</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge">🚀 Creative Digital Collective</div>
+        <h1>WE CREATE <br> <span>THE NEXT LEVEL</span> <br> DIGITAL DISRUPTION</h1>
+        <p class="hero-desc">PT.XYZ adalah studio kreatif & teknologi masa depan. Kami membantu brand menembus batas, memikat audiens Gen-Z, dan mendominasi ranah digital.</p>
+        <a href="#contact" class="btn-cta" style="padding: 1rem 2.5rem; font-size: 1rem;">Mulai Proyek ➔</a>
+    </section>
+
+    <!-- Marquee Animation -->
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span class="marquee-item">★ DIGITAL STRATEGY</span>
+            <span class="marquee-item">★ UI/UX DESIGN</span>
+            <span class="marquee-item">★ BRANDING & IDENTITY</span>
+            <span class="marquee-item">★ GEN-Z MARKETING</span>
+            <span class="marquee-item">★ DIGITAL STRATEGY</span>
+            <span class="marquee-item">★ UI/UX DESIGN</span>
+            <span class="marquee-item">★ BRANDING & IDENTITY</span>
+            <span class="marquee-item">★ GEN-Z MARKETING</span>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-title">SIAPA KAMI?</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-num">01</div>
+                <h3>Visioner</h3>
+                <p>Kami tidak mengikuti tren, kami yang membuatnya. Pendekatan kami selalu berani, eksperimental, dan relevan dengan budaya pop terkini.</p>
+            </div>
+            <div class="card">
+                <div class="card-num">02</div>
+                <h3>Berorientasi Hasil</h3>
+                <p>Kreativitas tanpa eksekusi hanyalah ilusi. Kami menggabungkan seni visual yang estetik dengan data analitik yang presisi.</p>
+            </div>
+            <div class="card">
+                <div class="card-num">03</div>
+                <h3>Tanpa Batas</h3>
+                <p>Dari Web3, AI, hingga kampanye viral di media sosial, PT.XYZ siap membawa brand Anda melompati zaman.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <h2 class="section-title">LAYANAN UNGGULAN</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>01. Creative Branding</h3>
+                <p>Membangun identitas visual yang otentik, edgy, dan berkarakter kuat agar brand Anda langsung dilirik pasar.</p>
+            </div>
+            <div class="card">
+                <h3>02. Web & Product Experience</h3>
+                <p>Pengembangan website dan aplikasi interaktif dengan performa super cepat dan estetika visual modern.</p>
+            </div>
+            <div class="card">
+                <h3>03. Viral Content Creation</h3>
+                <p>Strategi konten video pendek (TikTok/Reels) yang dirancang khusus untuk memicu keterikatan (engagement) tinggi.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section" id="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h2>150+</h2>
+                <p>Proyek Selesai</p>
+            </div>
+            <div class="stat-item">
+                <h2>99%</h2>
+                <p>Klien Puas</p>
+            </div>
+            <div class="stat-item">
+                <h2>10M+</h2>
+                <p>Impression Digital</p>
+            </div>
+            <div class="stat-item">
+                <h2>24/7</h2>
+                <p>Energi Kreatif</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Footer Section -->
+    <footer id="contact">
+        <p style="color: var(--accent-green); letter-spacing: 2px; font-weight: 700; margin-bottom: 1rem;">READY TO MAKE NOISE?</p>
+        <h2>MARI BEKERJA SAMA</h2>
+        <a href="mailto:hello@xyz.com" class="btn-cta" style="padding: 1.2rem 3rem; font-size: 1.1rem;">hello@ptxyz.com</a>
+
+        <div class="footer-bottom">
+            <p>© 2026 PT.XYZ. All Rights Reserved.</p>
+            <p>Designed for the Next Generation.</p>
+        </div>
+    </footer>
+
+    <!-- Simple JavaScript Animation for Interactive Effect -->
+    <script>
+        // Interactive Dynamic Cursor Glow Effect
+        const glow = document.querySelector('.glow');
+        
+        document.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX - 200 + 'px';
+            glow.style.top = e.clientY - 200 + 'px';
+        });
+    </script>
+</body>
+</html>
